@@ -73,27 +73,30 @@ Overview: {overview}
 Financials: {financials}
 Recent News: {news}
 """
-    response = openai.ChatCompletion.create(
+    client = openai.OpenAI(api_key=openai.api_key)
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}]
     )
-    return response.choices[0].message["content"]
+    return response.choices[0].message.content
 
 def generate_benchmark(company_name, industry_sector):
     prompt = f"Provide a benchmark analysis for {company_name} in the {industry_sector} sector."
-    response = openai.ChatCompletion.create(
+    client = openai.OpenAI(api_key=openai.api_key)
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}]
     )
-    return response.choices[0].message["content"]
+    return response.choices[0].message.content
 
 def generate_industry_intel(industry_sector, geographic_focus):
     prompt = f"Provide industry intelligence for the {industry_sector} sector in {geographic_focus}."
-    response = openai.ChatCompletion.create(
+    client = openai.OpenAI(api_key=openai.api_key)
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}]
     )
-    return response.choices[0].message["content"]
+    return response.choices[0].message.content
 
 # --- Report Generators ---
 def create_revenue_chart(revenue_data):
